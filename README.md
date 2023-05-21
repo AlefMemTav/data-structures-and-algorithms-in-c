@@ -2,11 +2,14 @@
 
 # Data structures 2
 This repository contains implementations of various data structures in the C programming language. The following data structures are currently available:
+
 - Bubble Sort
-- Hash Table
-- Linked List
-- Quick Select
 - Quick Sort
+- Quick Select
+- Linked List
+- Hash Table
+- Heap
+- Binary tree
 
 ## Bubble Sort
 
@@ -26,60 +29,3 @@ Quick Sort is a fast sorting algorithm that uses a divide-and-conquer strategy t
 
 # Running the Program
 To run the program, you will need to have a C compiler installed on your machine, such as GCC or Clang.
-
-#### Steps
-
-1. Clone the repository to your local machine using Git:
-
-```
-git clone https://github.com/AlefMemTav/estruturas-de-dados-2.git
-```
-
-#### If you want compile an specific code
-
-  2. Navigate to the directory of the data structure you want to use:
-
-  ```
-  cd estruturas-de-dados-2/LinkedList
-  ```
-
-3. Compile the code using the C compiler:
-
-```
-gcc linkedlist.c -o linkedlist
-```
-
-4. Run the executable:
-
-```
-./linkedlist
-```
-
-This will run the program and output the results to the terminal. You can modify the source code to change the input or output as desired.
-
-#### Else if you want compile all codes
-
-2. Navigate to the project directory:
-
-```
-cd estruturas-de-dados-2/
-```
-
-3. Compile the code:
-
-```
-gcc bubble_sort.c -o bubble_sort
-gcc hash_table.c -o hash_table
-gcc linked_list.c -o linked_list
-gcc quick_select.c -o quick_select
-gcc quick_sort.c -o quick_sort
-```
-
-4. Run a program:
-
-```
-./bubble_sort
-```
-
-# License
-This repository is licensed under the MIT license. See the LICENSE file for more details.
