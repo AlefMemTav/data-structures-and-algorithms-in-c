@@ -1,6 +1,6 @@
 <h1 align="center">📄 README</h1>
 
-# Data structures 2
+# Data structures
 This repository contains implementations of various data structures in the C programming language. The following data structures are currently available:
 
 - Bubble Sort
