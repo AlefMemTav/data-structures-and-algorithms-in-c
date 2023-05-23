@@ -10,11 +10,31 @@ typedef struct Node
 
 Node* createNode(int value)
 {
-    Node* newNode = (Node*)malloc(sizeof(Node));
-    newNode->value = value;
-    newNode->left = NULL;
-    newNode->right = NULL;
-    return newNode;
+    Node* node = (Node*)malloc(sizeof(Node));
+    node->value = value;
+    node->left = NULL;
+    node->right = NULL;
+    return node;
+}
+
+Node* insertNode(Node* root, int value)
+{
+    if(root == NULL)
+    {
+        return root = createNode(value);
+    }
+    else
+    {
+        if(value < root->value)
+        {
+            root->left = insertNode(root->left, value);
+        }
+        else if(value > root->value)
+        {
+            root->right = insertNode(root->right, value);
+        }
+        return root;
+    }
 }
 
 Node* searchNode(Node* root, int key)
@@ -104,36 +124,39 @@ Node* removeNode(Node* root, int key)
     return NULL;
 }
 
-Node* insert(Node* root, int value)
-{
-    if(root == NULL)
-    {
-        return root = createNode(value);
-    }
-    else
-    {
-        if(value < root->value)
-        {
-            root->left = insert(root->left, value);
-        }
-        if(value > root->value)
-        {
-            root->right = insert(root->right, value);
-        }
-        return root;
-    }
-    return NULL;
-}
+/* print tree */
 
-void printBtree(Node* root)
+void inOrder(Node* root)
 {
     if(root != NULL)
     {
-        printBtree(root->left);
+        inOrder(root->left);
         printf("%d ", root->value);
-        printBtree(root->right);
+        inOrder(root->right);
     }
 }
+
+void preOrder(Node* root)
+{
+    if(root != NULL)
+    {
+        printf("%d ", root->value);
+        preOrder(root->left);
+        preOrder(root->right);
+    }
+}
+
+void postOrder(Node* root)
+{
+    if(root != NULL)
+    {
+        postOrder(root->left);
+        postOrder(root->right);
+        printf("%d ", root->value);
+    }
+}
+
+/* height */
 
 int heightTree(Node* root)
 {
@@ -190,7 +213,7 @@ int main()
 
     do
     {
-        printf("\n\t 0 - SAIR \t 1 - INSERIR \t 2 - IMPRIMIR \t 3 - PESQUISAR \t 4 - REMOVER \t 5 - ALTURA DA ARVORE \t 6 - ALTURA DO NO\n");
+        printf("\n\t 0 - SAIR \t 1 - INSERIR \t 2 - IMPRIMIR \t 3 - PESQUISAR \t 4 - REMOVER \t 5 - ALTURA ARVORE \t 6 - ALTURA NO \t 7 - TAMANHO \n");
         scanf("%d", &op);
 
         switch(op)
@@ -201,17 +224,20 @@ int main()
         case 1:
             printf("Digite um valor: ");
             scanf("%d", &valor);
-            root = insert(root, valor);
+            root = insertNode(root, valor);
             break;
         case 2:
             printf("\t Arvore binaria:\n");
-            printBtree(root);
-            printf("\n\t Tamanho da arvore: %d\n", treeSize(root));
+            inOrder(root);
+            printf("\n");
+            preOrder(root);
+            printf("\n");
+            postOrder(root);
             break;
         case 3:
             printf("\t Digite o valor a ser buscado:\n");
             scanf("%d", &valor);
-            printf("Resultado: %d\n", searchNode(root, valor));
+            printf("Resultado: %d\n", searchNode(root, valor)->value);
             break;
         case 4:
             printf("Digite um valor a ser removido: ");
@@ -225,6 +251,9 @@ int main()
             printf("\t Digite o valor a ser buscado:\n");
             scanf("%d", &valor);
             printf("Altura do no: %d\n", heightNode(root, valor));
+            break;
+        case 7:
+            printf("\n\t Tamanho da arvore: %d\n", treeSize(root));
             break;
         default:
             printf("Invalido\n");
