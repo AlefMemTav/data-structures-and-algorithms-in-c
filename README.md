@@ -9,7 +9,8 @@ This repository contains implementations of various data structures in the C pro
 - Linked List
 - Hash Table
 - Heap
-- Binary tree
+- Binary Search tree
+- Balanced Binary Search tree
 
 ## Bubble Sort
 
