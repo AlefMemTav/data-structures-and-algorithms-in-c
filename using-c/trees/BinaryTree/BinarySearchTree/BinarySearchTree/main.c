@@ -154,23 +154,39 @@ void postOrder(Node* root)
     }
 }
 
+void printTree(Node* root, int level)
+{
+
+    if(root != NULL)
+    {
+        printTree(root->right, level + 1);
+        printf("\n\n");
+        for(int i = 0; i < level; i++)
+        {
+            printf("\t");
+        }
+        printf("%d", root->value);
+        printTree(root->left, level + 1);
+    }
+}
+
 int heightTree(Node* root)
 {
-    if(root == NULL || (root->right == NULL && root->left == NULL))
+    if(root == NULL)
     {
-        return 0;
+        return -1;
     }
     else
     {
-        int left = 1 + heightTree(root->left);
-        int right = 1 + heightTree(root->right);
+        int left = heightTree(root->left);
+        int right = heightTree(root->right);
         if(left > right)
         {
-            return left;
+            return 1 + left;
         }
         else
         {
-            return right;
+            return 1 + right;
         }
     }
 }
@@ -231,6 +247,44 @@ void levelNode(Node* root, int level)
     }
 }
 
+Node* findFather(Node* root, Node* x)
+{
+    if(root == NULL || root == x)
+    {
+        return NULL;
+    }
+
+    if(root->left == x || root->right == x)
+    {
+        return root;
+    }
+
+    Node* father = findFather(root->left, x);
+
+    if(father != NULL)
+    {
+        return father;
+    }
+    return findFather(root->right, x);
+}
+
+void printLeavesInOrder(Node* root)
+{
+    if (root != NULL)
+    {
+        if (root->left == NULL && root->right == NULL)
+        {
+            printf("%d ", root->value);
+
+        }
+        else
+        {
+            printLeavesInOrder(root->left);
+            printLeavesInOrder(root->right);
+        }
+    }
+}
+
 int main()
 {
     int op, valor;
@@ -240,7 +294,7 @@ int main()
     {
         printf("\n 0 - EXIT\t 1 - INSERT\t 2 - IN-ORDER\t 3 - PRE-ORDER\t 4 - POST-ORDER\t 5 - SEARCH");
         printf("\n 6 - REMOVE\t 7 - H.TREE\t 8 - H.NODE\t 9 - SIZE\t 10 - N.NODE\t 11 - N.LEAVES");
-        printf("\n 12 - LEVEL\n");
+        printf("\n 12 - LEVEL\t 13 - PRINT\t 14 - FATHER\t 15 - P.LEAVES\n");
         scanf("%d", &op);
         switch(op)
         {
@@ -301,6 +355,22 @@ int main()
         case 12:
             printf("Nivel do no: \n");
             levelNode(root, 0);
+            break;
+        case 13:
+            printTree(root,1);
+            break;
+        case 14:
+            printf("Digite o no que deseja descobrir seu pai: ");
+            scanf("%d", &valor);
+            Node* x = searchNode(root, valor);
+            Node* father = findFather(root,x);
+            if(father != NULL)
+            {
+                printf("Pai: %d", father->value);
+            }
+            break;
+        case 15:
+            printLeavesInOrder(root);
             break;
         default:
             printf("Invalido\n");
