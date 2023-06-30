@@ -10,7 +10,7 @@ This repository contains implementations of various data structures in the C pro
 - Hash Table
 - Heap
 - Binary Search tree
-- Balanced Binary Search tree
+- Balanced Binary Search tree (AVL, Red Black)
 
 ## Bubble Sort
 
