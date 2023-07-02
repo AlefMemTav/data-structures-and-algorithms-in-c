@@ -4,6 +4,7 @@
 This repository contains implementations of various data structures in the C programming language. The following data structures are currently available:
 
 - Bubble Sort
+- Merge Sort
 - Quick Sort
 - Quick Select
 - Linked List
