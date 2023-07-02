@@ -32,6 +32,11 @@ Time Complexity (Average and Worst)
 |Space Complexity (Worst)|
 |O(n)|
 
+
+![FirstTime](./assets/singlylinkedlist-firsttime.png)
+
+![Insert10](./assets/singlylinkedlist-insert10.png)
+
 ## Quick Select
 Quick Select is an efficient algorithm to find the k-th smallest element in an unsorted array of n elements. It is similar to Quick Sort, but instead of recursing into both sides, it only recurses into one side.
 
