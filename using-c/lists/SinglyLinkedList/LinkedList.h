@@ -7,17 +7,17 @@ typedef struct node
     struct node* next;
 } Node;
 
-typedef struct list
+typedef struct LinkedList
 {
     Node* header;
 } LinkedList;
 
-LinkedList* create_list();
+LinkedList* createList();
 
-void insert_node(LinkedList* list, int value);
+void insertNode(LinkedList* linkedList, int value);
 
-void remove_node(LinkedList* list, int value);
+void removeNode(LinkedList* linkedList, int value);
 
-void print_list(LinkedList* list);
+void printList(LinkedList* linkedList);
 
 #endif // LINKEDLIST_H_INCLUDED

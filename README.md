@@ -7,7 +7,7 @@ This repository contains implementations of various data structures in the C pro
 - Merge Sort
 - Quick Sort
 - Quick Select
-- Linked List
+- Singly Linked List
 - Hash Table
 - Heap
 - Binary Search tree
@@ -21,8 +21,16 @@ Bubble sort is a simple sorting algorithm that repeatedly steps through the list
 ## Hash Table
 A hash table is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
 
-## Linked List
-A linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. Each element of a linked list consists of two parts: the data and a reference to the next element.
+## Singly Linked List
+A singly linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. Each element of a linked list consists of two parts: the data and a reference to the next element.
+
+Time Complexity (Average and Worst)
+|Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(n)|O(n)|O(1)|O(1)|
+
+|Space Complexity (Worst)|
+|O(n)|
 
 ## Quick Select
 Quick Select is an efficient algorithm to find the k-th smallest element in an unsorted array of n elements. It is similar to Quick Sort, but instead of recursing into both sides, it only recurses into one side.

@@ -2,14 +2,14 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
-LinkedList* create_list()
+LinkedList* createList()
 {
     LinkedList* list = (LinkedList*) malloc(sizeof(LinkedList));
     list->header = NULL;
     return list;
 }
 
-void insert_node(LinkedList* list, int value)
+void insertNode(LinkedList* list, int value)
 {
     Node* new_node = (Node*) malloc(sizeof(Node));
     new_node->value = value;
@@ -17,7 +17,7 @@ void insert_node(LinkedList* list, int value)
     list->header = new_node;
 }
 
-void remove_node(LinkedList* list, int value)
+void removeNode(LinkedList* list, int value)
 {
     Node* current = list->header;
     Node* previous = NULL;
@@ -42,7 +42,7 @@ void remove_node(LinkedList* list, int value)
     }
 }
 
-void print_list(LinkedList* list)
+void printList(LinkedList* list)
 {
     Node* current = list->header;
 
