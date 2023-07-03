@@ -24,7 +24,7 @@ A hash table is a data structure that implements an associative array abstract d
 ## Singly Linked List
 A singly linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. Each element of a linked list consists of two parts: the data and a reference to the next element.
 
-Time Complexity (Average and Worst)
+#### Time Complexity (Average and Worst)
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(n)|O(n)|O(1)|O(1)|
@@ -33,10 +33,17 @@ Time Complexity (Average and Worst)
 |---|
 |O(n)|
 
+#### Insertion at the beginning:
 
-![FirstTime](./assets/singlylinkedlist-firsttime.png)
+1 - The first time the singly linked list points to NULL:
 
-![Insert10](./assets/singlylinkedlist-insert10.png)
+<img src="./assets/singlylinkedlist-firsttime.png" height="100">
+
+2 - When inserting the node with value 10, it becomes the new header of the list:
+<img src="./assets/singlylinkedlist-insert10.png" height="100">
+
+2 - The new node that succeeds node 10 will become the header of the list:
+<img src="./assets/singlylinkedlist-insert20.png" height="100">
 
 ## Quick Select
 Quick Select is an efficient algorithm to find the k-th smallest element in an unsorted array of n elements. It is similar to Quick Sort, but instead of recursing into both sides, it only recurses into one side.
