@@ -31,15 +31,12 @@ Graph* createGraph(int verticesNumber)
     graph->vertex = verticesNumber;
     graph->edge = 0;
     graph->adjacentVertices = (LinkedList*)malloc(verticesNumber * sizeof(LinkedList));
-    /*
-    * Initializes the graph with NULL
-    */
+    /*Initializes the graph with NULL*/
     for (int v = 0; v < verticesNumber; v++)
     {
         graph->adjacentVertices[v].header = NULL;
     }
     return graph;
-
 }
 
 void addEdge(Graph* graph, int vertexV, int vertexW)
@@ -74,6 +71,22 @@ void printGraph(Graph* graph)
         printf("\n");
     }
 }
+/* Depth first search */
+void dfs(Graph* graph, int vertex, int* marked)
+{
+    marked[vertex] = 1;
+    printf("%d ", vertex);
+    Node* current = graph->adjacentVertices[vertex].header;
+    while (current != NULL)
+    {
+        int adjacentVertex = current->item;
+        if (!marked[adjacentVertex])
+        {
+            dfs(graph, adjacentVertex, marked);
+        }
+        current = current->next;
+    }
+}
 
 void destroyGraph(Graph* graph)
 {
@@ -100,7 +113,9 @@ int main()
     // Criando um grafo com 5 vértices
     Graph* graph = createGraph(13);
 
-    // Adicionando algumas arestas
+    int marked[13];
+    memset(marked, 0, sizeof(marked));
+
     addEdge(graph, 0, 6);
     addEdge(graph, 0, 2);
     addEdge(graph, 0, 1);
@@ -118,8 +133,9 @@ int main()
     // Imprimindo o grafo
     printGraph(graph);
 
-    printf("%d vertices, %d arestas\n", graph->vertex, graph->edge);
+    dfs(graph, 2, marked);
 
+    printf("\n%d vertices, %d arestas\n", graph->vertex, graph->edge);
     // Destruindo o grafo
     destroyGraph(graph);
     return 0;
