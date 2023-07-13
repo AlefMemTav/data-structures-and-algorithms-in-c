@@ -12,7 +12,7 @@ This repository contains implementations of various data structures in the C pro
 - Heap
 - Binary Search tree
 - Balanced Binary Search tree (AVL, Red Black)
-- Undirected Graph (with adjacency-list)
+- Undirected Graph (adjacency-list and adjacency-matrix)
 
 ## Bubble Sort
 
