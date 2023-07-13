@@ -19,55 +19,8 @@ Node* createNode(int item)
 /* Linked List */
 typedef struct LinkedList
 {
-    Node* head;
+    Node* header;
 } LinkedList;
-
-/* Queue */
-typedef struct Queue
-{
-    Node* front;
-    Node* rear;
-} Queue;
-
-Queue* createQueue()
-{
-    Queue* queue = (Queue*)malloc(sizeof(Queue));
-    queue->front = NULL;
-    queue->rear = NULL;
-    return queue;
-}
-
-void enqueue(Queue* queue, int item)
-{
-    Node* node = createNode(item);
-    if (queue->rear == NULL)
-    {
-        queue->front = node;
-        queue->rear = node;
-    }
-    else
-    {
-        queue->rear->next = node;
-        queue->rear = node;
-    }
-}
-
-int dequeue(Queue* queue)
-{
-    if (queue->front == NULL)
-    {
-        return -1;
-    }
-    int item = queue->front->item;
-    Node* temp = queue->front;
-    queue->front = queue->front->next;
-    if (queue->front == NULL)
-    {
-        queue->rear = NULL;
-    }
-    free(temp);
-    return item;
-}
 
 /* Undirected Graph using Adjacency List*/
 typedef struct Graph
@@ -90,7 +43,7 @@ Graph* createGraph(int vertices)
     /*Initializes the graph with NULL*/
     for (int v = 0; v < vertices; v++)
     {
-        graph->adjacencyList[v].head = NULL;
+        graph->adjacencyList[v].header = NULL;
     }
     return graph;
 }
@@ -105,13 +58,13 @@ void addEdge(Graph* graph, int v, int w)
 
     Node* newNode = (Node*)malloc(sizeof(Node));
     newNode->item = w;
-    newNode->next = graph->adjacencyList[v].head;
-    graph->adjacencyList[v].head = newNode;
+    newNode->next = graph->adjacencyList[v].header;
+    graph->adjacencyList[v].header = newNode;
 
     newNode = (Node*)malloc(sizeof(Node));
     newNode->item = v;
-    newNode->next = graph->adjacencyList[w].head;
-    graph->adjacencyList[w].head = newNode;
+    newNode->next = graph->adjacencyList[w].header;
+    graph->adjacencyList[w].header = newNode;
 }
 
 void printGraph(Graph* graph)
@@ -119,7 +72,7 @@ void printGraph(Graph* graph)
     for (int v = 0; v < graph->vertices; v++)
     {
         printf("%d: ", v);
-        Node* current = graph->adjacencyList[v].head;
+        Node* current = graph->adjacencyList[v].header;
         while (current != NULL)
         {
             printf("%d ", current->item);
@@ -137,7 +90,7 @@ void destroyGraph(Graph* graph)
     }
     for (int v = 0; v < graph->vertices; v++)
     {
-        Node* current = graph->adjacencyList[v].head;
+        Node* current = graph->adjacencyList[v].header;
         while (current != NULL)
         {
             Node* next = current->next;
@@ -150,17 +103,18 @@ void destroyGraph(Graph* graph)
 }
 
 /* Depth-first search */
-void dfs(Graph* graph, int v, int* marked)
+void dfs(Graph* graph, int vertex, int* visited)
 {
-    marked[v] = 1;
-    printf("%d ", v);
-    Node* current = graph->adjacencyList[v].head;
+    visited[vertex] = 1;
+    printf("%d ", vertex);
+
+    Node* current = graph->adjacencyList[vertex].header;
     while (current != NULL)
     {
         int adjacentVertex = current->item;
-        if (!marked[adjacentVertex])
+        if (!visited[adjacentVertex])
         {
-            dfs(graph, adjacentVertex, marked);
+            dfs(graph, adjacentVertex, visited);
         }
         current = current->next;
     }
@@ -169,29 +123,35 @@ void dfs(Graph* graph, int v, int* marked)
 /* Breadth-first search */
 void bfs(Graph* graph, int v, int* marked)
 {
-    Queue* queue = createQueue();
-    marked[v] = 1;
-    enqueue(queue, v);
+    int vertices = graph->vertices;
+    int* queue = (int*)malloc(vertices * sizeof(int));
+    int front = 0;
+    int rear = 0;
 
-    while (queue->front != NULL)
+    marked[v] = 1;
+    queue[rear++] = v;
+
+    while (front != rear)
     {
-        int currentVertex = dequeue(queue);
+        int currentVertex = queue[front++];
         printf("%d ", currentVertex);
 
-        Node* adjacentNode = graph->adjacencyList[currentVertex].head;
+        Node* adjacentNode = graph->adjacencyList[currentVertex].header;
         while (adjacentNode != NULL)
         {
             int adjacentVertex = adjacentNode->item;
             if (marked[adjacentVertex] == 0)
             {
                 marked[adjacentVertex] = 1;
-                enqueue(queue, adjacentVertex);
+                queue[rear++] = adjacentVertex;
             }
             adjacentNode = adjacentNode->next;
         }
     }
+
     free(queue);
 }
+
 
 int main()
 {
@@ -221,8 +181,9 @@ int main()
     // Imprimindo o grafo
     printGraph(graph);
 
+    printf("DFS:\n");
     dfs(graph, 1, markedDFS);
-    printf("\n");
+    printf("\nBFS:\n");
     bfs(graph, 1, markedBFS);
 
     printf("\n%d vertices, %d arestas\n", graph->vertices, graph->edges);
