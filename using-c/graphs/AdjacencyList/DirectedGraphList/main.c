@@ -61,11 +61,6 @@ void addEdge(Graph* graph, int v, int w)
     newNode->item = w;
     newNode->next = graph->adjacencyList[v].header;
     graph->adjacencyList[v].header = newNode;
-
-    newNode = (Node*)malloc(sizeof(Node));
-    newNode->item = v;
-    newNode->next = graph->adjacencyList[w].header;
-    graph->adjacencyList[w].header = newNode;
 }
 
 void printGraph(Graph* graph)
@@ -104,7 +99,7 @@ void destroyGraph(Graph* graph)
 }
 
 /* Depth-first search */
-void dfs(Graph* graph, int vertex, int* visited, int* dfsTree)
+void dfs(Graph* graph, int vertex, int* visited)
 {
     visited[vertex] = 1;
     printf("%d ", vertex);
@@ -115,15 +110,14 @@ void dfs(Graph* graph, int vertex, int* visited, int* dfsTree)
         int adjacentVertex = current->item;
         if (!visited[adjacentVertex])
         {
-            dfsTree[adjacentVertex] = vertex;
-            dfs(graph, adjacentVertex, visited, dfsTree);
+            dfs(graph, adjacentVertex, visited);
         }
         current = current->next;
     }
 }
 
 /* Breadth-first search */
-void bfs(Graph* graph, int v, int* visited, int* tree)
+void bfs(Graph* graph, int v, int* visited)
 {
     int vertices = graph->vertices;
     int* queue = (int*)malloc(vertices * sizeof(int));
@@ -145,7 +139,6 @@ void bfs(Graph* graph, int v, int* visited, int* tree)
             if (visited[adjacentVertex] == 0)
             {
                 visited[adjacentVertex] = 1;
-                tree[adjacentVertex] = currentVertex;
                 queue[rear++] = adjacentVertex;
             }
             adjacentNode = adjacentNode->next;
@@ -155,35 +148,24 @@ void bfs(Graph* graph, int v, int* visited, int* tree)
     free(queue);
 }
 
-void printTree(Graph* graph, int* tree)
-{
-    for (int i = 0; i < graph->vertices; i++)
-    {
-        if (tree[i] != -1)
-        {
-            printf("%d -> %d\n", tree[i], i);
-        }
-    }
-}
-
 int main()
 {
     /* Graph */
     Graph* graph = createGraph(13);
 
-    addEdge(graph, 0, 6);
+    addEdge(graph, 1, 0);
     addEdge(graph, 0, 2);
-    addEdge(graph, 0, 1);
     addEdge(graph, 0, 5);
-    addEdge(graph, 3, 5);
+    addEdge(graph, 5, 3);
     addEdge(graph, 3, 4);
     addEdge(graph, 4, 5);
     addEdge(graph, 4, 6);
+    addEdge(graph, 6, 0);
     addEdge(graph, 7, 8);
-    addEdge(graph, 9, 11);
-    addEdge(graph, 9, 10);
     addEdge(graph, 9, 12);
-    addEdge(graph, 11, 12);
+    addEdge(graph, 10, 9);
+    addEdge(graph, 11, 9);
+    addEdge(graph, 12, 11);
 
     printf("Graph:\n");
     printGraph(graph);
@@ -197,30 +179,18 @@ int main()
     int bfsVisited[13];
     memset(bfsVisited, 0, sizeof(bfsVisited));
 
-    /* Tree */
-    int* dfsTree = (int*)malloc(13 * sizeof(int));
-    memset(dfsTree, -1, 13 * sizeof(int));
-
-    int* bfsTree = (int*)malloc(13 * sizeof(int));
-    memset(bfsTree, -1, 13 * sizeof(int));
-
     /* Traversal */
     printf("\nDFS Traversal:\n");
-    dfs(graph, 1, dfsVisited, dfsTree);
+    dfs(graph, 1, dfsVisited);
 
     printf("\n\nBFS Traversal:\n");
-    bfs(graph, 1, bfsVisited, bfsTree);
+    bfs(graph, 1, bfsVisited);
 
-    printf("\n\nDFS Tree:\n");
-    printTree(graph, dfsTree);
-
-    printf("\nBFS Tree:\n");
-    printTree(graph, bfsTree);
-
-    /* Reverse Graph */
+    /* Reverse Graph
     Graph* reverse = reverseGraph(graph);
     printf("\n");
     printGraph(reverse);
+    */
 
     destroyGraph(graph);
     return 0;

@@ -122,16 +122,22 @@ void bfs(Graph* graph, int startVertex, int* visited)
 
 int main()
 {
-    int vertices = 5;
+    int vertices = 13;
     Graph* graph = createGraph(vertices);
 
+    addEdge(graph, 0, 6);
+    addEdge(graph, 0, 2);
     addEdge(graph, 0, 1);
-    addEdge(graph, 0, 4);
-    addEdge(graph, 1, 2);
-    addEdge(graph, 1, 3);
-    addEdge(graph, 1, 4);
-    addEdge(graph, 2, 3);
+    addEdge(graph, 0, 5);
+    addEdge(graph, 3, 5);
     addEdge(graph, 3, 4);
+    addEdge(graph, 4, 5);
+    addEdge(graph, 4, 6);
+    addEdge(graph, 7, 8);
+    addEdge(graph, 9, 11);
+    addEdge(graph, 9, 10);
+    addEdge(graph, 9, 12);
+    addEdge(graph, 11, 12);
 
     printGraph(graph);
 
