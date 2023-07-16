@@ -23,7 +23,7 @@ typedef struct LinkedList
     Node* header;
 } LinkedList;
 
-/* Undirected Graph using Adjacency List*/
+/* Directed Graph using Adjacency List*/
 typedef struct Graph
 {
     int vertices;
@@ -76,6 +76,66 @@ void printGraph(Graph* graph)
         }
         printf("\n");
     }
+}
+
+Graph* reverseGraph(Graph* graph)
+{
+    if (graph == NULL)
+    {
+        return NULL;
+    }
+
+    int vertices = graph->vertices;
+    Graph* reversedGraph = createGraph(vertices);
+
+    for (int v = 0; v < vertices; v++)
+    {
+        Node* current = graph->adjacencyList[v].header;
+        while (current != NULL)
+        {
+            int adjacentVertex = current->item;
+            addEdge(reversedGraph, adjacentVertex, v);
+            current = current->next;
+        }
+    }
+
+    return reversedGraph;
+}
+
+int getDegree(Graph* graph, int v)
+{
+    if (graph == NULL || v < 0 || v >= graph->vertices)
+    {
+        return -1;
+    }
+
+    int inDegree = 0;
+    int outDegree = 0;
+
+    // Calcula in-degree contando as arestas que apontam para o vértice v
+    for (int i = 0; i < graph->vertices; i++)
+    {
+        Node* current = graph->adjacencyList[i].header;
+        while (current != NULL)
+        {
+            if (current->item == v)
+            {
+                inDegree++;
+                break;
+            }
+            current = current->next;
+        }
+    }
+
+    // Calcula out-degree contando as arestas que partem do vértice v
+    Node* current = graph->adjacencyList[v].header;
+    while (current != NULL)
+    {
+        outDegree++;
+        current = current->next;
+    }
+
+    return inDegree + outDegree;
 }
 
 void destroyGraph(Graph* graph)
@@ -148,6 +208,67 @@ void bfs(Graph* graph, int v, int* visited)
     free(queue);
 }
 
+void dfsFirstPass(Graph* graph, int vertex, int* visited, LinkedList* stack)
+{
+    visited[vertex] = 1;
+
+    Node* current = graph->adjacencyList[vertex].header;
+    while (current != NULL)
+    {
+        int adjacentVertex = current->item;
+        if (!visited[adjacentVertex])
+        {
+            dfsFirstPass(graph, adjacentVertex, visited, stack);
+        }
+        current = current->next;
+    }
+
+    Node* newNode = createNode(vertex);
+    newNode->next = stack->header;
+    stack->header = newNode;
+}
+
+void stronglyConnectedComponents(Graph* graph)
+{
+    int vertices = graph->vertices;
+    int* visited = (int*)calloc(vertices, sizeof(int));
+    LinkedList* stack = (LinkedList*)malloc(sizeof(LinkedList));
+    stack->header = NULL;
+
+    // Primeira passagem: Busca em profundidade no grafo original
+    for (int v = 0; v < vertices; v++)
+    {
+        if (!visited[v])
+        {
+            dfsFirstPass(graph, v, visited, stack);
+        }
+    }
+
+    // Grafo reverso
+    Graph* reversedGraph = reverseGraph(graph);
+
+    // Segunda passagem: Busca em profundidade no grafo reverso
+    memset(visited, 0, vertices * sizeof(int)); // Resetando o vetor visited
+
+    while (stack->header != NULL)
+    {
+        int vertex = stack->header->item;
+        stack->header = stack->header->next;
+
+        if (!visited[vertex])
+        {
+            printf("Component: ");
+            dfs(reversedGraph, vertex, visited);
+            printf("\n");
+        }
+    }
+
+    free(stack);
+    free(visited);
+    destroyGraph(reversedGraph);
+}
+
+
 int main()
 {
     /* Graph */
@@ -186,11 +307,19 @@ int main()
     printf("\n\nBFS Traversal:\n");
     bfs(graph, 1, bfsVisited);
 
-    /* Reverse Graph
-    Graph* reverse = reverseGraph(graph);
-    printf("\n");
-    printGraph(reverse);
-    */
+    /* Reverse Graph */
+    Graph* reversedGraph = reverseGraph(graph);
+    printf("\nReversed Graph:\n");
+    printGraph(reversedGraph);
+
+
+    int vertex = 9;
+    int degree = getDegree(graph, vertex);
+    printf("\nDegree of vertex %d: %d\n", vertex, degree);
+
+    printf("\nStrongly Connected Components:\n");
+    stronglyConnectedComponents(graph);
+
 
     destroyGraph(graph);
     return 0;

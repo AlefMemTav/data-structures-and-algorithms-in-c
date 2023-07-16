@@ -83,6 +83,24 @@ void printGraph(Graph* graph)
     }
 }
 
+int getDegree(Graph* graph, int v)
+{
+    if (graph == NULL || v < 0 || v >= graph->vertices)
+    {
+        return -1;
+    }
+
+    int degree = 0;
+    Node* current = graph->adjacencyList[v].header;
+    while (current != NULL)
+    {
+        degree++;
+        current = current->next;
+    }
+
+    return degree;
+}
+
 void destroyGraph(Graph* graph)
 {
     if (graph == NULL)
