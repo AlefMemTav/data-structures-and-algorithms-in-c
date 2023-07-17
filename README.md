@@ -31,18 +31,25 @@ Quick Select is an efficient algorithm to find the k-th smallest element in an u
 
 A singly linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. Each element of a linked list consists of two parts: the data and a reference to the next element.
 
-#### Time Complexity (Average and Worst)
+#### Time Complexity (Average*)
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(n)|O(n)|O(1)|O(1)|
 
-|Space Complexity (Worst)|
+*If insertion and deletion is at the beginning.
+
+#### Time Complexity (Worst)
+|Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(n)|O(n)|O(n)|O(n)|
+
+|Space Complexity|
 |---|
 |O(n)|
 
 #### Insertion at the beginning:
 
-1 - The first time the singly linked list points to NULL:
+1 - In the first time the singly linked list points to NULL:
 
 <img src="./assets/singlylinkedlist-firsttime.png" height="100">
 
@@ -57,6 +64,7 @@ A singly linked list is a linear data structure, in which the elements are not s
 A hash table is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
 
 ## Linear-probing and Separate-chaining
+
 #### Time Complexity (Average)
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
@@ -67,11 +75,13 @@ A hash table is a data structure that implements an associative array abstract d
 |---|---|---|---|
 |O(n)|O(n)|O(n)|O(n)|
 
-|Space Complexity (Linear-probing)|
+#### Linear-probing
+|Space Complexity |
 |---|
 |O(n)|
 
-|Space Complexity (Separate-chaining)|
+#### Separate-chaining
+|Space Complexity |
 |---|
 |O(m+n)|
 
@@ -83,9 +93,9 @@ A hash table is a data structure that implements an associative array abstract d
 
 ## Adjacency List
 #### Time Complexity (Average and Worst)
-|Insertion|Deletion|
-|---|---|
-|O(1)|O(1)|
+Access|Insertion|Deletion|
+|---|---|---|
+|O(n)|O(1)|O(degree)|
 
 |Space Complexity|
 |---|
@@ -94,9 +104,9 @@ A hash table is a data structure that implements an associative array abstract d
 ## Adjacency Matrix
 
 #### Time Complexity (Average and Worst)
-|Insertion|Deletion|
-|---|---|
-|O(1)|O(1)|
+Access|Insertion|Deletion|
+|---|---|---|
+|O(1)|O(1)|O(V)|
 
 |Space Complexity|
 |---|
