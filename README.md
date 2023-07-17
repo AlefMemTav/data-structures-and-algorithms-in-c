@@ -72,27 +72,32 @@ typedef struct LinkedList
 
 <img src="./assets/singlylinkedlist-firsttime.png" height="100">
 
-2 - When inserting the node with value 10, it becomes the new header of the list:
+2 - When inserting a new node, it becomes the new header of the list:
 <img src="./assets/singlylinkedlist-insert10.png" height="100">
 
-3 - The new node that succeeds node 10 will become the header of the list:
+3 - So successively, because the insertion is at the beginning:
 <img src="./assets/singlylinkedlist-insert20.png" height="100">
 
 ## Hash Table
 
-A hash table is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
+A hash table is a data structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
 
-### Linear-probing
+### Linear-probing approach
+A sufficiently large array where the elements are spread out to avoid collisions. It has less wasted space and better cache performance.
 
-### Separate-chaining
+### Separate-chaining approach
+An array of linked lists where the elements are spread out in the list. It is less sensitive to poorly-designed hash functions and avoids collisions better.
 
 ### Complexity
 #### Time Complexity (Average)
+##### Linear-probing and separate-chaining
+
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(1)|O(1)|O(1)|O(1)|
 
 #### Time Complexity (Worst)
+##### Linear-probing and separate-chaining
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(n)|O(n)|O(n)|O(n)|
@@ -116,25 +121,58 @@ Set of vertices connected pairwise by edges.
 ### Digraph
 Set of vertices connected pairwise by directed edges.
 
+
+### Main structure:
+#### Adjacency List
+```C
+typedef struct Node
+{
+    int value;
+    struct Node* next;
+} Node;
+
+typedef struct LinkedList
+{
+    Node* header;
+} LinkedList;
+
+/* Graph or Digraph using Adjacency List */
+typedef struct Graph
+{
+    int vertices;
+    int edges;
+    LinkedList* adjacencyList;
+} Graph;
+```
+#### Adjacency Matrix
+```C
+/* Graph or Digraph using Adjacency Matrix */
+typedef struct Graph
+{
+    int vertices;
+    int** adjacencyMatrix;
+} Graph;
+```
 ### Complexity
+
 #### Time Complexity (Average and Worst)
 ##### Adjacency List
-Access|Insertion|Deletion|
-|---|---|---|
-|O(n)|O(1)|O(degree)|
+Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(n)|-|O(1)|O(degree)|
+
+##### Adjacency Matrix
+Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(1)|-|O(1)|O(V)|
 
 #### Space Complexity
+##### Adjacency List
 |Space|
 |---|
 |E+V|
 
-#### Time Complexity (Average and Worst)
 ##### Adjacency Matrix
-Access|Insertion|Deletion|
-|---|---|---|
-|O(1)|O(1)|O(V)|
-
-#### Space Complexity
 |Space|
 |---|
 |V*V|
