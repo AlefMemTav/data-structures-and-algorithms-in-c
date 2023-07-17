@@ -73,9 +73,11 @@ typedef struct LinkedList
 <img src="./assets/singlylinkedlist-firsttime.png" height="100">
 
 2 - When inserting a new node, it becomes the new header of the list:
+
 <img src="./assets/singlylinkedlist-insert10.png" height="100">
 
 3 - So successively, because the insertion is at the beginning:
+
 <img src="./assets/singlylinkedlist-insert20.png" height="100">
 
 ## Hash Table
@@ -144,6 +146,22 @@ typedef struct Graph
     LinkedList* adjacencyList;
 } Graph;
 ```
+#### Adjacency List (Simplified)
+```C
+typedef struct Node
+{
+    int value;
+    struct Node* next;
+} Node;
+
+/* Graph or Digraph using Adjacency List */
+typedef struct Graph
+{
+    int vertices;
+    Node** adjacencyList;
+} Graph;
+
+```
 #### Adjacency Matrix
 ```C
 /* Graph or Digraph using Adjacency Matrix */
@@ -176,6 +194,20 @@ Access|Search|Insertion|Deletion|
 |Space|
 |---|
 |V*V|
+
+### Important algorithms
+
+|Name|Problem|Time|Space|Graph or Digraph| Edge weight|
+|---|---|---|---|---|---|
+|DFS|Path|E+V|V|All|No|
+|BFS|Shortest Path|E+V|V|All|No|
+|Topological Sort|Shortest Path|V + E|V|Digraph|No|
+|Bellman-Ford|Shortest Path|V(V + E)|V|Digraph|Yes|
+|Floyd–Warshall|All-pairs shortest paths|V * V * V |V*V|Digraph|Yes|
+|Dijkstra|Minimum spanning tree|E log V|V|All|Yes|
+|Prim|Minimum spanning tree|E log V|V|Graph|Yes|
+|Kruskal|Minimum spanning tree|E log E|E + V|Graph|Yes|
+
 
 # Running the Program
 To run the program, you will need to have a C compiler installed on your machine, such as GCC or Clang.
