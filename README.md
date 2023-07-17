@@ -1,7 +1,9 @@
 <h1 align="center">📄 README</h1>
 
-# Data structures
-This repository contains implementations of various data structures in the C programming language. The following data structures are currently available:
+# Data structures and algorithms
+This repository contains implementations of various data structures and algorithms in the C programming language. 
+
+The following data structures are currently available:
 
 - Bubble Sort
 - Merge Sort
@@ -10,10 +12,10 @@ This repository contains implementations of various data structures in the C pro
 - Singly Linked List
 - Hash Table
 - Heap
-- Binary Search tree
-- Balanced Binary Search tree (AVL, Red Black)
-- Undirected Graph (Adjacency List, Adjacency Matrix)
-- Directed Graph (Adjacency List, Adjacency Matrix)
+- Binary Search Tree
+- Balanced Binary Search Tree (AVL, Red Black)
+- Graph or undirected Graph (Adjacency List, Adjacency Matrix)
+- Digraph or directed Graph (Adjacency List, Adjacency Matrix)
 
 ## Bubble Sort
 
@@ -31,7 +33,22 @@ Quick Select is an efficient algorithm to find the k-th smallest element in an u
 
 A singly linked list is a linear data structure, in which the elements are not stored at contiguous memory locations. Each element of a linked list consists of two parts: the data and a reference to the next element.
 
-#### Time Complexity (Average*)
+### Main structure:
+```c
+typedef struct Node
+{
+    int value;
+    struct Node* next;
+} Node;
+
+typedef struct LinkedList
+{
+    Node* header;
+} LinkedList;
+```
+
+### Complexity
+#### Time Complexity (Average)*
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(n)|O(n)|O(1)|O(1)|
@@ -43,11 +60,13 @@ A singly linked list is a linear data structure, in which the elements are not s
 |---|---|---|---|
 |O(n)|O(n)|O(n)|O(n)|
 
-|Space Complexity|
+#### Space Complexity
+|Space|
 |---|
 |O(n)|
 
-#### Insertion at the beginning:
+### Operation
+### Insertion at the beginning:
 
 1 - In the first time the singly linked list points to NULL:
 
@@ -63,8 +82,11 @@ A singly linked list is a linear data structure, in which the elements are not s
 
 A hash table is a data structure that implements an associative array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index into an array of buckets or slots, from which the desired value can be found.
 
-## Linear-probing and Separate-chaining
+### Linear-probing
 
+### Separate-chaining
+
+### Complexity
 #### Time Complexity (Average)
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
@@ -75,40 +97,45 @@ A hash table is a data structure that implements an associative array abstract d
 |---|---|---|---|
 |O(n)|O(n)|O(n)|O(n)|
 
-#### Linear-probing
-|Space Complexity |
+#### Space Complexity
+##### Linear-probing
+|Space|
 |---|
 |O(n)|
 
-#### Separate-chaining
-|Space Complexity |
+##### Separate-chaining
+|Space|
 |---|
 |O(m+n)|
 
-# Heap
+## Graph and Digraph
 
-# Binary Search tree
+### Graph
+Set of vertices connected pairwise by edges.
 
-# Graph 
+### Digraph
+Set of vertices connected pairwise by directed edges.
 
-## Adjacency List
+### Complexity
 #### Time Complexity (Average and Worst)
+##### Adjacency List
 Access|Insertion|Deletion|
 |---|---|---|
 |O(n)|O(1)|O(degree)|
 
-|Space Complexity|
+#### Space Complexity
+|Space|
 |---|
 |E+V|
 
-## Adjacency Matrix
-
 #### Time Complexity (Average and Worst)
+##### Adjacency Matrix
 Access|Insertion|Deletion|
 |---|---|---|
 |O(1)|O(1)|O(V)|
 
-|Space Complexity|
+#### Space Complexity
+|Space|
 |---|
 |V*V|
 
