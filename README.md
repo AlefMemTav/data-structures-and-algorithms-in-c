@@ -11,7 +11,7 @@ The following data structures are currently available:
 - Quick Select
 - Singly Linked List
 - Hash Table
-- Heap
+- Binary Heap
 - Binary Search Tree
 - Balanced Binary Search Tree (AVL, Red Black)
 - Graph or undirected Graph (Adjacency List, Adjacency Matrix)
@@ -114,6 +114,9 @@ An array of linked lists where the elements are spread out in the list. It is le
 |Space|
 |---|
 |O(m+n)|
+
+## Binary Heap
+
 
 ## Binary Search Tree
 A binary search tree is a data structure where each node has a key and an associated value that the key in any node is larger than the keys in all nodes in that node's left subtree and smaller than the keys in all nodes in that node's right subtree.
@@ -254,14 +257,14 @@ typedef struct Graph
 
 #### Time Complexity (Average and Worst)
 ##### Adjacency List
-Access|Search|Insertion|Deletion|
-|---|---|---|---|
-|O(n)|-|O(1)|O(degree)|
+Access|Search|Insertion (Vertex)|Insertion (Edge)|Deletion (Vertex)|Deletion (Edge)|
+|---|---|---|---|---|---|
+|O(n)|-|O(1)|O(1)|O(E)|O(V)|
 
 ##### Adjacency Matrix
-Access|Search|Insertion|Deletion|
-|---|---|---|---|
-|O(1)|-|O(1)|O(V)|
+Access|Search|Insertion (Vertex)|Insertion (Edge)|Deletion (Vertex)|Deletion (Edge)|
+|---|---|---|---|---|---|
+|O(1)|-|O(V * V)|O(1)|O(V * V)|O(1)
 
 #### Space Complexity
 ##### Adjacency List
