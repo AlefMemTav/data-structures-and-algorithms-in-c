@@ -92,14 +92,14 @@ An array of linked lists where the elements are spread out in the list. It is le
 
 ### Complexity
 #### Time Complexity (Average)
-##### Linear-probing and separate-chaining
+##### Linear-probing, separate-chaining
 
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(1)|O(1)|O(1)|O(1)|
 
 #### Time Complexity (Worst)
-##### Linear-probing and separate-chaining
+##### Linear-probing, separate-chaining
 |Access|Search|Insertion|Deletion|
 |---|---|---|---|
 |O(n)|O(n)|O(n)|O(n)|
@@ -114,6 +114,85 @@ An array of linked lists where the elements are spread out in the list. It is le
 |Space|
 |---|
 |O(m+n)|
+
+## Binary Search Tree
+A binary search tree is a data structure where each node has a key and an associated value that the key in any node is larger than the keys in all nodes in that node's left subtree and smaller than the keys in all nodes in that node's right subtree.
+
+### Main structure:
+
+```C
+typedef struct Node
+{
+    int value;
+    struct Node* left;
+    struct Node* right;
+} Node;
+```
+### Complexity
+#### Time Complexity (Average)
+|Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(log n)|O(log n)|O(log n)|O(sqrt n)|
+
+#### Time Complexity (Worst)
+|Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(n)|O(n)|O(n)|O(n)|
+
+#### Space Complexity
+|Space|
+|---|
+|O(n)|
+
+## Balanced Binary Search Tree
+
+### Main structure:
+#### AVL
+```C
+typedef struct Node
+{
+    int value;
+    int height;
+    int factor;
+    struct Node* left;
+    struct Node* right;
+} Node;
+```
+
+#### Red Black
+```C
+typedef enum { RED, BLACK } Color;
+
+typedef struct Node
+{
+    int key;
+    int value;
+    Color color;
+    struct Node* left;
+    struct Node* right;
+} Node;
+```
+
+
+### Complexity
+#### Time Complexity (Average)
+##### AVL, Red Black
+
+|Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(log n)|O(log n)|O(log n)|O(log n)|
+
+#### Time Complexity (Worst)
+##### AVL, Red Black
+|Access|Search|Insertion|Deletion|
+|---|---|---|---|
+|O(log n)|O(log n)|O(log n)|O(log n)|
+
+#### Space Complexity
+|Space|
+|---|
+|O(n)|
+
 
 ## Graph and Digraph
 
